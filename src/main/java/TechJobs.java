@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -59,6 +56,7 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term:");
+
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
@@ -77,7 +75,7 @@ public class TechJobs {
         Boolean validChoice = false;
         String[] choiceKeys = new String[choices.size()];
 
-        // Put the choices in an ordered structure so we can
+        // Put the choices in an ordered structure, so we can
         // associate an integer with each one
         int i = 0;
         for (String choiceKey : choices.keySet()) {
@@ -119,7 +117,35 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        //if somejob=0, println "No Results". Else the rest...
+        if (someJobs.size() == 0){
+            System.out.print("No Results");
+        }
+        else {
+            System.out.println();
+            HashMap<String, String> currentHashMap;
+            for (int i = 0; i < someJobs.size(); i++) {
+                currentHashMap = someJobs.get(i);
+                System.out.println("*****");
+                Iterator currentIterator = currentHashMap.entrySet().iterator();
+                while (currentIterator.hasNext()) {
+                    Map.Entry mapElemet = (Map.Entry) currentIterator.next();
+                    String key = (String) mapElemet.getKey();
+                    String value = (String) mapElemet.getValue();
+                    System.out.println(key + ": " + value);
 
-        System.out.println("printJobs is not implemented yet");
+                }
+                if (i == someJobs.size() - 1) {
+                    System.out.println("*****");
+                } else {
+                    System.out.println("*****\n");
+                }
+
+                //System.out.println();
+            }
+        }
+         //System.out.println("printJobs is not implemented yet");
     }
+
+
 }

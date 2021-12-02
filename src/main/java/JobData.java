@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -79,7 +76,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -98,8 +95,39 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        ArrayList<HashMap<String, String>> result= new ArrayList<>();
+        // recorrer l'arraylist element per element (HashMaps)
+        //Per a cada HashMap fer
+        for (HashMap<String, String> row : allJobs) {
+
+            // Per a cada columna fer
+            for(String key : row.keySet()) {
+                String columnValue = row.get(key);
+                columnValue = columnValue.toLowerCase();
+                // Si el valor d'aquestsa columna conte el valor buscat aleshores
+                if ( columnValue.contains(value.toLowerCase())) {
+                    // insertar el HashMap al resultat
+                    result.add(row);
+                    break;
+                }// fi si
+            }// fi bucle
+        }// Fi del bucle
+
+        // Bubble sort
+//        for( int i=0; i<result.size() - 1; i++){
+//            for( int j=0; j<result.size()-1-i; j++){
+//                HashMap<String,String> map1=result.get(j);
+//                HashMap<String,String> map2=result.get(j+1);
+//                if(map1.get("position type").compareTo(map2.get("position type"))>0){
+//                    //System.out.println("map1: "+map1.get("position type"));
+//                    //System.out.println("map2: "+map2.get("position type"));
+//                    result.set(j,map2);
+//                    result.set(j+1,map1);
+//                }
+//            }
+//        }
+
+        return result;
     }
 
     /**
